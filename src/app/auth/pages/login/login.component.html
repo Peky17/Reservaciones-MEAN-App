@@ -28,9 +28,12 @@
                                 <div class="form-group mb-3">
                                     <label for="password">Contraseña</label>
                                     <input class="form-control" pattern="(?=.*\d)(?=.*[a-záéíóúüñ]).*[A-ZÁÉÍÓÚÜÑ].*" title="Debe tener al menos una mayúscula, una minúscula y un dígito" maxlength="25" minlength="5" type="Password" placeholder="Contraseña" name="password" required="">
-                                </div>
+                                </div><br>
                                 <div class="form-group">
                                     <button type="submit" name="enviar" class="form-control btn btn-primary rounded submit px-3">Ingresar</button>
+                                </div>
+                                <div class="text-left">
+                                  <a routerLink="/auth/register" class="text-reset">¡Registrate aquí!</a>
                                 </div>
                             </form>
                         </div>
