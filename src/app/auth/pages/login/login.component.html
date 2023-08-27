@@ -21,7 +21,11 @@
                     <h3 class="mb-4">Iniciar sesión</h3>
                   </div>
                 </div>
-                <form [formGroup]="miFormulario" class="signin-form">
+                <form
+                  (ngSubmit)="login()"
+                  [formGroup]="miFormulario"
+                  class="signin-form"
+                >
                   <div class="form-group mb-3">
                     <label for="name">Correo electrónico</label>
                     <input
@@ -30,6 +34,7 @@
                       type="email"
                       class="form-control"
                       placeholder="Correo electrónico"
+                      required
                     />
                   </div>
                   <div class="form-group mb-3">
@@ -44,6 +49,7 @@
                       minlength="5"
                       type="Password"
                       placeholder="Contraseña"
+                      required=""
                     />
                   </div>
                   <br />
