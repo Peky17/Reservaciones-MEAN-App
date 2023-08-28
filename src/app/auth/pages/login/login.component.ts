@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -24,13 +25,25 @@ export class LoginComponent {
   ) {}
 
   login() {
-    console.log(this.miFormulario.value);
-    this.authService.login(this.miFormulario.value).subscribe(res => {
-      if(res){
-        localStorage.setItem("user", JSON.stringify(this.authService.user));
+    this.authService.login(this.miFormulario.value).subscribe((res) => {
+      if (res === true) {
+        // Almacenar el usuario logueado
+        localStorage.setItem('user', JSON.stringify(this.authService.user));
+        // Bienvenida
+        Swal.fire({
+          title: 'SESIÓN INICIADA CON ÉXITO',
+          text: 'Bienvenido ' + this.authService.user.username,
+          icon: 'success'
+        });
         // Redireccionar
         this.router.navigateByUrl('/task');
+      } else {
+        Swal.fire({
+          title: 'OPERACIÓN DENEGADA',
+          text: res,
+          icon: 'error'
+        });
       }
-    })
+    });
   }
 }
