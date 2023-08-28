@@ -4,12 +4,8 @@ import { MainTaskComponent } from './pages/main-task/main-task.component';
 
 const routes: Routes = [
   {
-    path: 'mainTask',
-    component: MainTaskComponent,
-  },
-  {
     path: '**',
-    redirectTo: 'mainTask',
+    component: MainTaskComponent,
   }
 ];
 

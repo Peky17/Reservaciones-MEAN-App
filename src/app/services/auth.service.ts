@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, of, tap } from 'rxjs';
+import { Observable, catchError, map, of, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -33,4 +33,20 @@ export class AuthService {
         catchError((err) => of(err.error.msg))
       );
   }
+
+  validarToken(): Observable<boolean>{
+
+    const token = JSON.parse(localStorage.getItem('user')!);
+
+    if(token){
+      return new Observable((suscriber) => {
+        suscriber.next(true);
+      });
+    } else {
+      return new Observable((suscriber) => {
+        suscriber.next(false);
+      });
+    }
+  }
+
 }
