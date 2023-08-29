@@ -1,12 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map, of, tap } from 'rxjs';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   constructor(private httpClient: HttpClient) {}
+
+  private baseUrl = environment.baseUrl;
 
   private _user: any = {};
 
@@ -16,7 +19,7 @@ export class AuthService {
 
   login(data: any) {
     return this.httpClient
-      .post<any>('http://localhost:2450/auth/login', data)
+      .post<any>(this.baseUrl + '/auth/login', data)
       .pipe(
         tap((res) => {
           if (res.ok === true) {

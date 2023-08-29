@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, of, tap } from 'rxjs';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -8,11 +9,13 @@ import { catchError, map, of, tap } from 'rxjs';
 export class RegisterService {
   constructor(private httpClient: HttpClient) {}
 
+  private baseUrl = environment.baseUrl;
+
   private response: any = {};
 
   registrarUsuario(data: any) {
     return this.httpClient
-      .post<any>('http://localhost:2450/auth/registrar', data)
+      .post<any>(this.baseUrl + '/auth/registrar', data)
       .pipe(
         tap((res) => {
           if (res.ok === true) {
