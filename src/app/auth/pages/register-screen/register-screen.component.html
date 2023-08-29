@@ -17,7 +17,7 @@
                     <h3 class="mb-4">Registrarme</h3>
                   </div>
                 </div>
-                <form [formGroup]="miFormulario" class="signin-form">
+                <form [formGroup]="miFormulario" (ngSubmit)="registerUsuario()" class="signin-form">
                   <div class="form-group mb-2">
                     <label for="name">Correo electrónico</label>
                     <input

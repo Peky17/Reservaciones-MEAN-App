@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { RegisterService } from 'src/app/services/register.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register-screen',
@@ -21,9 +23,39 @@ export class RegisterScreenComponent {
     ],
   });
 
-  constructor(private fb: FormBuilder, registerService: RegisterService) {}
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private registerService: RegisterService
+  ) {}
 
-  registrarUsuario(){
+  registerUsuario() {
+    const formData = this.miFormulario.value;
+
+    if (formData.password === formData.confirmPassword) {
+      this.registerService.registrarUsuario(formData).subscribe((res) => {
+        if (res === true) {
+          Swal.fire({
+            title: 'OPERACIÓN EXITOSA',
+            text: 'Usuario registrado exitosamente.',
+            icon: 'success',
+          });
+          // Redireccionar
+          this.router.navigateByUrl('/auth/login');
+        } else {
+          Swal.fire({
+            title: 'OPERACIÓN DENEGADA',
+            text: 'No se pudo registrar el usuario.',
+            icon: 'error',
+          });
+        }
+      });
+    } else {
+      Swal.fire({
+        title: 'ERROR',
+        text: 'Las contraseñas no coinciden.',
+        icon: 'error',
+      });
+    }
   }
-
 }
