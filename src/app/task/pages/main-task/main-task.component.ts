@@ -1,19 +1,21 @@
-import { Component } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
+import { Component, OnInit } from '@angular/core';
+import { TareasService } from 'src/app/services/tareas.service';
 
 @Component({
   selector: 'app-main-task',
   templateUrl: './main-task.component.html',
   styleUrls: ['./main-task.component.css'],
 })
-export class MainTaskComponent {
-
+export class MainTaskComponent implements OnInit {
   user: any;
+  tasks: Array<any> = [];
 
-  constructor(private authService: AuthService ) {
-    this.user = JSON.parse(localStorage.getItem('user') || "");
-    console.log(this.user);
+  constructor(private taskService: TareasService) {}
 
+  ngOnInit() {
+    this.user = this.taskService.user;
+    this.taskService.readTareas().subscribe((res) => {
+      this.tasks = res.tareas;
+    });
   }
-
 }
