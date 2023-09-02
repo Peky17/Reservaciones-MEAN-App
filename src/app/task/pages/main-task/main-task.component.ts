@@ -16,6 +16,7 @@ export class MainTaskComponent implements OnInit {
     this.user = this.taskService.user;
     this.taskService.readTareas().subscribe((res) => {
       this.tasks = res.tareas;
+      console.log(res.tareas);
     });
   }
 }
