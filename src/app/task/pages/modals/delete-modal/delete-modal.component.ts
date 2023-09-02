@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-delete-modal',
@@ -7,9 +8,12 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class DeleteModalComponent implements OnInit {
 
-  dataFromOtherComponent: any;
+  closeModal() {
+    this.activeModal.close();
+  }
 
-  constructor(){}
+  constructor(public activeModal: NgbActiveModal){
+  }
 
   ngOnInit(): void {
 

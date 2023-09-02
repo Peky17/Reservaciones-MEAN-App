@@ -1,19 +1,14 @@
-<!-- modal.component.html -->
-<div class="modal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Modal</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Mensaje aquí</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary">Cerrar</button>
-      </div>
-    </div>
-  </div>
+<div class="modal-header">
+  <h4 class="modal-title">Editar Tarea</h4>
+  <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <!-- Aquí puedes mostrar el contenido de la tarea que se está editando -->
+  <p>Contenido pasado del componente</p>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" (click)="closeModal()">Cerrar</button>
+  <button type="button" class="btn btn-primary">Guardar Cambios</button>
 </div>

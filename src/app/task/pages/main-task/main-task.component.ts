@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TareasService } from 'src/app/services/tareas.service';
+import { DeleteModalComponent } from '../modals/delete-modal/delete-modal.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-main-task',
@@ -10,7 +12,12 @@ export class MainTaskComponent implements OnInit {
   user: any;
   tasks: Array<any> = [];
 
-  constructor(private taskService: TareasService) {}
+  constructor(private taskService: TareasService, private modalService: NgbModal) {}
+
+  openModal() {
+    this.modalService.open(DeleteModalComponent);
+  }
+
 
   ngOnInit() {
     this.user = this.taskService.user;
