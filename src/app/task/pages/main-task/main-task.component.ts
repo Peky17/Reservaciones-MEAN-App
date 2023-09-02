@@ -4,7 +4,7 @@ import { TareasService } from 'src/app/services/tareas.service';
 @Component({
   selector: 'app-main-task',
   templateUrl: './main-task.component.html',
-  styleUrls: ['./main-task.component.css'],
+  styleUrls: ['./main-task.component.css']
 })
 export class MainTaskComponent implements OnInit {
   user: any;
@@ -16,7 +16,6 @@ export class MainTaskComponent implements OnInit {
     this.user = this.taskService.user;
     this.taskService.readTareas().subscribe((res) => {
       this.tasks = res.tareas;
-      console.log(res.tareas);
     });
   }
 }
