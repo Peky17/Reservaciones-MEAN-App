@@ -1,7 +1,19 @@
-<app-navbar></app-navbar>
-<ul>
-  <li *ngFor="let task of tasks">
-    {{task.nombre}}
-  </li>
-</ul>
+<!-- Navbar de la app -->
+<app-navbar></app-navbar><br />
+<div class="container">
+  <h2>Tareas registradas</h2>
+  <!-- Renderizar lista de tareas -->
+  <div class="row card-container">
+    <div *ngFor="let task of tasks" class="card bg-light mb-3">
+      <div class="card-body">
+        <h4 class="card-title">{{ task.nombre }}</h4>
+        <div class="btn-group" role="group" aria-label="Botones de acción">
+          <button type="button" class="btn btn-primary">Editar</button>
+          <button type="button" class="btn btn-danger">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Footer de la app -->
 <app-footer></app-footer>
