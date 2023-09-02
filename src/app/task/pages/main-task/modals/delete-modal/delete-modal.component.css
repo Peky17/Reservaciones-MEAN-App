@@ -1,0 +1,8 @@
+/* En tu archivo CSS o en el archivo de estilos de tu componente */
+.highlight-modal {
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+  border-radius: 10px; /* Borde redondeado opcional */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra opcional */
+  z-index: 1050; /* Asegura que el modal esté en primer plano */
+  transition: all 0.3s ease; /* Transición suave para los cambios de estilo */
+}
