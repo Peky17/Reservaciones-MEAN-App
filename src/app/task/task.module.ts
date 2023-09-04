@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { TaskRoutingModule } from './task-routing.module';
 import { MainTaskComponent } from './pages/main-task/main-task.component';
@@ -21,7 +22,8 @@ import { AddModalComponent } from './pages/main-task/modals/add-modal/add-modal.
   ],
   imports: [
     CommonModule,
-    TaskRoutingModule
+    TaskRoutingModule,
+    ReactiveFormsModule
   ],
   exports: [
     MainTaskComponent,

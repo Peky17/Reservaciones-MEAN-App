@@ -11,8 +11,6 @@ export class RegisterService {
 
   private baseUrl = environment.baseUrl;
 
-  private response: any = {};
-
   registrarUsuario(data: any) {
     return this.httpClient
       .post<any>(this.baseUrl + '/auth/registrar', data)
