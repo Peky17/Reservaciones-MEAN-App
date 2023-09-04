@@ -1,11 +1,11 @@
 <!-- Contenido del modal template -->
 <ng-template #content let-c="close" let-d="dismiss">
 	<div class="modal-header">
-		<h4 class="modal-title" id="modal-basic-title">Eliminar tarea</h4>
+		<h4 class="modal-title" id="modal-basic-title">Editar tarea</h4>
 		<button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
 	</div>
 	<div class="modal-body">
-		<p>Hello, World!</p>
+		<p>Editar tarea</p>
 	</div>
 	<div class="modal-footer">
 		<button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
@@ -13,4 +13,4 @@
 </ng-template>
 
 <!-- Botón que accionará el modal -->
-<button type="button" class="btn btn-danger" (click)="open(content)">Eliminar</button>
+<button type="button" class="btn btn-success" (click)="open(content)">Editar</button>

@@ -6,10 +6,10 @@
   <div class="row card-container">
     <div *ngFor="let task of tasks" class="card bg-light mb-3">
       <div class="card-body">
-        <h4 class="card-title">{{ task.nombre }}</h4>
+        <h4 class="card-title">{{ task.nombre }}</h4><br>
         <div class="btn-group" role="group" aria-label="Botones de acción">
-          <button type="button" class="btn btn-primary">Editar</button>
-          <app-delete-modal></app-delete-modal>
+          <app-update-modal style="margin-right: 2px;"></app-update-modal>
+          <app-delete-modal style="margin-right: 2px;"></app-delete-modal>
         </div>
       </div>
     </div>
