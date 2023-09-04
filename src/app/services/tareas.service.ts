@@ -19,12 +19,15 @@ export class TareasService {
     return this._user;
   }
 
-  readTareas(): Observable<TareaResponse> { // Usa la interfaz aquí
+  readTareas(): Observable<TareaResponse> {
+    // Usa la interfaz aquí
     const headers = {
       'x-auth-token': this.user.token,
     };
 
-    return this.httpClient.get<TareaResponse>(`${this.baseUrl}/task/read`, { headers });
+    return this.httpClient.get<TareaResponse>(`${this.baseUrl}/task/read`, {
+      headers,
+    });
   }
 
   addTarea(data: any) {
@@ -34,6 +37,48 @@ export class TareasService {
 
     return this.httpClient
       .post<any>(this.baseUrl + '/task/create', data, { headers })
+      .pipe(
+        tap((res) => {
+          if (res.ok === true) {
+            res.msg;
+          } else {
+            res.msg;
+          }
+        }),
+        map((res) => res.ok),
+        catchError((err) => of(err.error.msg))
+      );
+  }
+
+  eliminarTarea(idTarea: string) {
+    const headers = {
+      'x-auth-token': this.user.token,
+    };
+
+    return this.httpClient
+      .delete<any>(`${this.baseUrl}/task/delete/${idTarea}`, { headers })
+      .pipe(
+        tap((res) => {
+          if (res.ok === true) {
+            res.msg;
+          } else {
+            res.msg;
+          }
+        }),
+        map((res) => res.ok),
+        catchError((err) => of(err.error.msg))
+      );
+  }
+
+  actualizarTarea(data: any, idTarea: string) {
+    const headers = {
+      'x-auth-token': this.user.token,
+    };
+
+    return this.httpClient
+      .put<any>(`${this.baseUrl}/task/update/${idTarea}`, data, {
+        headers,
+      })
       .pipe(
         tap((res) => {
           if (res.ok === true) {

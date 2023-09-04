@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { TareasService } from 'src/app/services/tareas.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-main-task',
@@ -10,13 +11,23 @@ export class MainTaskComponent implements OnInit {
   user: any;
   tasks: Array<any> = [];
 
-  constructor(private taskService: TareasService) {}
+  @Input() tarea: any;
 
+  constructor(private taskService: TareasService) {}
 
   ngOnInit() {
     this.user = this.taskService.user;
-    this.taskService.readTareas().subscribe((res) => {
-      this.tasks = res.tareas;
-    });
+    this.taskService.readTareas().subscribe(
+      (res) => {
+        this.tasks = res.tareas;
+      },
+      (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'SU SESIÓN HA EXPIRADO',
+          text: error
+        });
+      }
+    );
   }
 }

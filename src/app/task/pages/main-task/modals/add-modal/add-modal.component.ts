@@ -15,12 +15,11 @@ import Swal from 'sweetalert2';
   providers: [NgbModalConfig, NgbModal],
 })
 export class AddModalComponent {
-
   constructor(
     config: NgbModalConfig,
     private modalService: NgbModal,
     private tareasService: TareasService,
-    private formBuilder: FormBuilder,
+    private formBuilder: FormBuilder
   ) {
     config.backdrop = 'static';
     config.keyboard = true;
@@ -36,7 +35,7 @@ export class AddModalComponent {
   }
 
   addFormulario: FormGroup = this.formBuilder.group({
-    nombre: ['', [Validators.required, Validators.minLength(6)]]
+    nombre: ['', [Validators.required, Validators.minLength(6)]],
   });
 
   addTarea() {
@@ -45,10 +44,16 @@ export class AddModalComponent {
     // Realizar la petición
     this.tareasService.addTarea(formData).subscribe((res) => {
       if (res === 'true') {
+        // Cerrar modal
+        this.modalService.dismissAll();
+        // Alertar
         Swal.fire({
           title: 'OPERACIÓN EXITOSA',
           text: 'Tarea registrada con éxito',
           icon: 'success',
+        }).then(() => {
+          // Recargar la página
+          location.reload();
         });
       } else {
         Swal.fire({
@@ -56,9 +61,9 @@ export class AddModalComponent {
           text: res,
           icon: 'error',
         });
+        // Cerrar modal
+        this.modalService.dismissAll();
       }
-      // Cerrar modal
-      this.modalService.dismissAll();
     });
   }
 }
