@@ -7,6 +7,7 @@ import { NavbarComponent } from './pages/main-task/shared/navbar/navbar.componen
 import { FooterComponent } from './pages/main-task/shared/footer/footer.component';
 import { DeleteModalComponent } from './pages/main-task/modals/delete-modal/delete-modal.component';
 import { UpdateModalComponent } from './pages/main-task/modals/update-modal/update-modal.component';
+import { AddModalComponent } from './pages/main-task/modals/add-modal/add-modal.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { UpdateModalComponent } from './pages/main-task/modals/update-modal/upda
     NavbarComponent,
     FooterComponent,
     DeleteModalComponent,
-    UpdateModalComponent
+    UpdateModalComponent,
+    AddModalComponent
   ],
   imports: [
     CommonModule,

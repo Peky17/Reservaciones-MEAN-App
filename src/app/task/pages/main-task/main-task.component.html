@@ -1,7 +1,9 @@
 <!-- Navbar de la app -->
 <app-navbar></app-navbar><br />
 <div class="container">
-  <h2>Tareas registradas</h2>
+  <h2>Tareas registradas</h2><br>
+  <!-- Agregar modal -->
+  <app-add-modal></app-add-modal>
   <!-- Renderizar lista de tareas -->
   <div class="row card-container">
     <div *ngFor="let task of tasks" class="card bg-light mb-3">
