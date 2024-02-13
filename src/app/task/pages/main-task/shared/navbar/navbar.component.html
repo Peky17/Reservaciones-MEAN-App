@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Task App</a>
+    <a class="navbar-brand" routerLink="/task">Ticket Master</a>
     <button
       class="navbar-toggler"
       type="button"
@@ -15,13 +15,17 @@
     <div class="collapse navbar-collapse" id="navbarColor02">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link active" href="#"
-            >Tareas
+          <a class="nav-link active" routerLink="/task"
+            >Reservaciones
             <span class="visually-hidden">(current)</span>
           </a>
         </li>
       </ul>
-      <button class="btn btn-secondary my-2 my-sm-0" type="button" (click)="logOut()">
+      <button
+        class="btn btn-secondary my-2 my-sm-0"
+        type="button"
+        (click)="logOut()"
+      >
         Cerrar sesión
       </button>
     </div>
