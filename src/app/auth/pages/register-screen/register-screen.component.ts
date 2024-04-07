@@ -11,19 +11,29 @@ import Swal from 'sweetalert2';
 })
 export class RegisterScreenComponent implements OnInit {
   passwordsMatch: boolean = false;
+  usernameError: string = '';
   passwordError: string = '';
   confirmPasswordError: string = '';
 
   miFormulario: FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
-    username: ['', [Validators.required, Validators.minLength(4)]],
+    username: [
+      '',
+      [
+        Validators.required,
+        Validators.minLength(4),
+        Validators.maxLength(10),
+        Validators.pattern(/^[A-Z][A-Za-z0-9]{3,9}$/),
+      ],
+    ],
     password: [
       '',
       [
         Validators.required,
         Validators.minLength(6),
+        Validators.maxLength(8),
         Validators.pattern(
-          /^(?:[!@#$%^&*()_+{}\[\]:;<>,.?/~`\-]+[a-z]*|[a-z]+[!@#$%^&*()_+{}\[\]:;<>,.?/~`\-]*)$/
+          /^(?:[!@#$%^&*()_+{}\[\]:;<>,.?/~`\-]+\s*[a-z]*|[a-z]+\s*[!@#$%^&*()_+{}\[\]:;<>,.?/~`\-]*)$/
         ),
       ],
     ],
@@ -33,7 +43,7 @@ export class RegisterScreenComponent implements OnInit {
         Validators.required,
         Validators.minLength(6),
         Validators.pattern(
-          /^(?:[!@#$%^&*()_+{}\[\]:;<>,.?/~`\-]+[a-z]*|[a-z]+[!@#$%^&*()_+{}\[\]:;<>,.?/~`\-]*)$/
+          /^(?:[!@#$%^&*()_+{}\[\]:;<>,.?/~`\-]+\s*[a-z]*|[a-z]+\s*[!@#$%^&*()_+{}\[\]:;<>,.?/~`\-]*)$/
         ),
       ],
     ],
@@ -46,6 +56,10 @@ export class RegisterScreenComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.miFormulario.get('username')!.valueChanges.subscribe(() => {
+      this.validateUsername();
+    });
+
     this.miFormulario.get('password')!.valueChanges.subscribe(() => {
       this.validatePassword();
     });
@@ -131,6 +145,17 @@ export class RegisterScreenComponent implements OnInit {
     return errorMessage;
   }
 
+  validateUsername(): void {
+    const usernameControl = this.miFormulario.get('username');
+    const pattern = /^[A-Z][A-Za-z0-9]{3,9}$/;
+    const usernameValue = usernameControl!.value;
+    const isUsernameValid = pattern.test(usernameValue);
+    if (!isUsernameValid) {
+      this.usernameError =
+        'El username solo acepta de 4 a 10 caracteres alfanuméricos. No acepta minúsculas al inicio. No se permiten caracteres especiales al inicio. No se permiten espacios';
+    }
+  }
+
   validatePassword(): void {
     const passwordControl = this.miFormulario.get('password');
     const confirmPasswordControl = this.miFormulario.get('confirmPassword');
@@ -144,7 +169,7 @@ export class RegisterScreenComponent implements OnInit {
     const confirmPasswordValue = confirmPasswordControl!.value;
 
     const pattern =
-      /^(?:[!@#$%^&*()_+{}\[\]:;<>,.?/~`\-]+[a-z]*|[a-z]+[!@#$%^&*()_+{}\[\]:;<>,.?/~`\-]*)$/;
+      /^(?:[!@#$%^&*()_+{}\[\]:;<>,.?/~`\-]+\s*[a-z]*|[a-z]+\s*[!@#$%^&*()_+{}\[\]:;<>,.?/~`\-]*)$/;
 
     const isPasswordValid = pattern.test(passwordValue);
     const isConfirmPasswordValid = pattern.test(confirmPasswordValue);

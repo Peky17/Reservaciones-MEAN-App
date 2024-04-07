@@ -39,6 +39,9 @@
                       class="form-control"
                       placeholder="Nombre de usuario"
                     />
+                    <small *ngIf="usernameError" class="text-danger">
+                      {{ usernameError }}
+                    </small>
                   </div>
                   <div class="form-group mb-2">
                     <label for="password">Contraseña</label>

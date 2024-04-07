@@ -11,9 +11,9 @@ import Swal from 'sweetalert2';
 })
 export class LoginComponent {
   miFormulario: FormGroup = this.fb.group({
-    email: ['kike@gmail.com', [Validators.required, Validators.email]],
+    email: ['kike17@gmail.com', [Validators.required, Validators.email]],
     password: [
-      '123457',
+      '#ejemplo',
       [Validators.required, Validators.minLength(6), Validators.maxLength(12)],
     ],
   });
@@ -33,7 +33,7 @@ export class LoginComponent {
         Swal.fire({
           title: 'SESIÓN INICIADA CON ÉXITO',
           text: 'Bienvenido ' + this.authService.user.username,
-          icon: 'success'
+          icon: 'success',
         });
         // Redireccionar
         this.router.navigateByUrl('/task');
@@ -41,7 +41,7 @@ export class LoginComponent {
         Swal.fire({
           title: 'OPERACIÓN DENEGADA',
           text: res,
-          icon: 'error'
+          icon: 'error',
         });
       }
     });
