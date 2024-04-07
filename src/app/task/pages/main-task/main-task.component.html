@@ -1,11 +1,12 @@
 <!-- Navbar de la app -->
 <app-navbar></app-navbar><br />
 <div class="container">
-  <h2>Tareas registradas</h2><br>
+  <h2>¿Qué desea reservar?</h2>
+  <br />
   <!-- Agregar modal -->
-  <app-add-modal></app-add-modal>
+  <!-- <app-add-modal></app-add-modal> -->
   <!-- Renderizar lista de tareas -->
-  <div class="row card-container">
+  <!-- <div class="row card-container">
     <div *ngFor="let task of tasks" class="card bg-light mb-3">
       <div class="card-body">
         <h4 class="card-title">{{ task.nombre }}</h4><br>
@@ -13,6 +14,45 @@
           <app-update-modal style="margin-right: 2px;" [tarea]="task"></app-update-modal>
           <app-delete-modal style="margin-right: 2px;" [tarea]="task"></app-delete-modal>
         </div>
+      </div>
+    </div>
+  </div> -->
+  <!-- Cards de seleccion (menú) -->
+  <div class="row">
+    <div class="card" style="width: 18rem">
+      <img src="assets/teatro.jpg" class="card-img-top" alt="..." />
+      <div class="card-body">
+        <h5 class="card-title">Teatros</h5>
+        <p class="card-text">
+          Teatros disponibles en la ciudad de Guadalajara.
+        </p>
+        <a href="#" class="btn btn-primary"
+          >Ver teatros disponibles <i class="fa fa-eye" style="margin: 3px"></i
+        ></a>
+      </div>
+    </div>
+    <div class="card" style="width: 18rem">
+      <img src="assets/cine.jpg" class="card-img-top" alt="..." />
+      <div class="card-body">
+        <h5 class="card-title">Cines</h5>
+        <p class="card-text">
+          Cines disponibles en la ciudad de Guadalajara.
+        </p>
+        <a href="#" class="btn btn-primary"
+          >Ver cines disponibles <i class="fa fa-eye" style="margin: 3px"></i
+        ></a>
+      </div>
+    </div>
+    <div class="card" style="width: 18rem">
+      <img src="assets/museo.jpg" class="card-img-top" alt="..." />
+      <div class="card-body">
+        <h5 class="card-title">Museos</h5>
+        <p class="card-text">
+          Museos disponibles en la ciudad de Guadalajara.
+        </p>
+        <a href="#" class="btn btn-primary"
+          >Ver museos disponibles <i class="fa fa-eye" style="margin: 3px"></i
+        ></a>
       </div>
     </div>
   </div>
