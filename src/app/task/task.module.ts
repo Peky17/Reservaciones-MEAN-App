@@ -36,7 +36,10 @@ import { MuseosComponent } from './pages/museos/museos.component';
     NavbarComponent,
     FooterComponent,
     DeleteModalComponent,
-    UpdateModalComponent
+    UpdateModalComponent,
+    TeatrosComponent,
+    CinesComponent,
+    MuseosComponent
   ]
 })
 export class TaskModule { }
