@@ -18,19 +18,19 @@ export class MainTaskComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.taskService.user;
-    this.taskService.readTareas().subscribe(
-      (res) => {
-        this.tasks = res.tareas;
-      },
-      (error) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'SU SESIÓN HA EXPIRADO',
-          text: 'Porfavor inicie sesión'
-        });
-        localStorage.clear();
-        this.router.navigateByUrl("auth/login");
-      }
-    );
+    // this.taskService.readTareas().subscribe(
+    //   (res) => {
+    //     this.tasks = res.tareas;
+    //   },
+    //   (error) => {
+    //     Swal.fire({
+    //       icon: 'error',
+    //       title: 'SU SESIÓN HA EXPIRADO',
+    //       text: 'Porfavor inicie sesión'
+    //     });
+    //     localStorage.clear();
+    //     this.router.navigateByUrl("auth/login");
+    //   }
+    // );
   }
 }
