@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CinesComponent } from './pages/cines/cines.component';
 
 const routes: Routes = [
-  // {
-  //   path: '**',
-  //   component: MainCineComponent,
-  // },
+  {
+    path: '**',
+    component: CinesComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class CinesRoutingModule { }
+export class CinesRoutingModule {}

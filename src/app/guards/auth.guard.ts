@@ -6,24 +6,23 @@ import { AuthService } from '../services/auth.service';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard  {
-
-  constructor(private authService: AuthService, private router: Router){}
+export class AuthGuard {
+  constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(): Observable<boolean> | boolean {
     return this.authService.validarToken().pipe(
-      tap(valid => {
+      tap((valid) => {
         if (!valid) {
-          this.router.navigateByUrl("/auth");
+          this.router.navigateByUrl('/auth');
         }
       })
     );
   }
   canLoad(): Observable<boolean> | boolean {
     return this.authService.validarToken().pipe(
-      tap(valid => {
+      tap((valid) => {
         if (!valid) {
-          this.router.navigateByUrl("/auth");
+          this.router.navigateByUrl('/auth');
         }
       })
     );
