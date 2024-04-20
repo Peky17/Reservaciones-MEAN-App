@@ -7,25 +7,16 @@ import { MainTaskComponent } from './pages/main-task/main-task.component';
 import { DeleteModalComponent } from './pages/main-task/modals/delete-modal/delete-modal.component';
 import { UpdateModalComponent } from './pages/main-task/modals/update-modal/update-modal.component';
 import { AddModalComponent } from './pages/main-task/modals/add-modal/add-modal.component';
-import { NavbarComponent } from '../shared/navbar/navbar.component';
-import { FooterComponent } from '../shared/footer/footer.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
     MainTaskComponent,
-    NavbarComponent,
-    FooterComponent,
     DeleteModalComponent,
     UpdateModalComponent,
     AddModalComponent,
   ],
-  imports: [CommonModule, TaskRoutingModule, ReactiveFormsModule],
-  exports: [
-    MainTaskComponent,
-    NavbarComponent,
-    FooterComponent,
-    DeleteModalComponent,
-    UpdateModalComponent,
-  ],
+  imports: [CommonModule, TaskRoutingModule, ReactiveFormsModule, SharedModule],
+  exports: [MainTaskComponent, DeleteModalComponent, UpdateModalComponent],
 })
 export class TaskModule {}
