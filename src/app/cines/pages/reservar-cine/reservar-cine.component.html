@@ -1,1 +1,100 @@
-<p>reservar-cine works!</p>
+<div id="stepper1" class="bs-stepper">
+  <div class="bs-stepper-header" role="tablist">
+    <!-- your steps here -->
+    <div class="step" data-target="#logins-part">
+      <button
+        type="button"
+        class="step-trigger"
+        role="tab"
+        aria-controls="logins-part"
+        id="logins-part-trigger"
+      >
+        <span class="bs-stepper-circle">1</span>
+        <span class="bs-stepper-label">Seleccionar función</span>
+      </button>
+    </div>
+    <div class="line"></div>
+    <div class="step" data-target="#information-part">
+      <button
+        type="button"
+        class="step-trigger"
+        role="tab"
+        aria-controls="information-part"
+        id="information-part-trigger"
+      >
+        <span class="bs-stepper-circle">2</span>
+        <span class="bs-stepper-label">Seleccionar asientos</span>
+      </button>
+    </div>
+    <div class="line"></div>
+    <div class="step" data-target="#payment-part">
+      <button
+        type="button"
+        class="step-trigger"
+        role="tab"
+        aria-controls="payment-part"
+        id="payment-part-trigger"
+      >
+        <span class="bs-stepper-circle">3</span>
+        <span class="bs-stepper-label">Pagar boletos</span>
+      </button>
+    </div>
+  </div>
+  <div class="bs-stepper-content">
+    <div
+      id="logins-part"
+      class="content"
+      role="tabpanel"
+      aria-labelledby="logins-part-trigger"
+      style="position: relative"
+    >
+      <br />
+      <!-- Card Slider for movies -->
+      <app-card-slider></app-card-slider>
+      <br />
+      <div
+        style="
+          position: absolute;
+          bottom: -125px;
+          left: 50%;
+          transform: translateX(-50%);
+        "
+      >
+        <br />
+        <button
+          class="btn btn-primary"
+          (click)="next()"
+          style="margin-top: -50px"
+        >
+          Siguiente paso<i class="fa fa-arrow-right" style="margin: 4px"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Vincular a edificio form -->
+    <div
+      id="information-part"
+      class="content"
+      role="tabpanel"
+      aria-labelledby="information-part-trigger"
+    >
+      <h5>EJEMPLO 2</h5>
+      <button type="button" class="btn btn-primary" (click)="previous()">
+        Vincular dispositivo
+        <i class="fa fa-check-circle-o" style="margin: 4px"></i>
+      </button>
+    </div>
+    <div
+      id="payment-part"
+      class="content"
+      role="tabpanel"
+      aria-labelledby="payment-part-trigger"
+    >
+      <h5>EJEMPLO 2</h5>
+      <button type="button" class="btn btn-primary" (click)="previous()">
+        Vincular dispositivo
+        <i class="fa fa-check-circle-o" style="margin: 4px"></i>
+      </button>
+    </div>
+  </div>
+</div>
