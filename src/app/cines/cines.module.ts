@@ -10,6 +10,7 @@ import { CardSliderComponent } from './pages/components/card-slider/card-slider.
 import { SelectAsientosComponent } from './pages/components/select-asientos/select-asientos.component';
 import { SeatsioAngularModule } from '@seatsio/seatsio-angular';
 import { InvoiceComponent } from './pages/components/invoice/invoice.component';
+import { PayementCardComponent } from './pages/components/payement-card/payement-card.component';
 @NgModule({
   declarations: [
     CinesComponent,
@@ -18,6 +19,7 @@ import { InvoiceComponent } from './pages/components/invoice/invoice.component';
     CardSliderComponent,
     SelectAsientosComponent,
     InvoiceComponent,
+    PayementCardComponent,
   ],
   imports: [
     CommonModule,

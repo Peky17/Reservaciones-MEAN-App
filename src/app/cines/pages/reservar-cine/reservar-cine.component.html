@@ -14,6 +14,19 @@
       </button>
     </div>
     <div class="line"></div>
+    <div class="step" data-target="#confirm-part">
+      <button
+        type="button"
+        class="step-trigger"
+        role="tab"
+        aria-controls="confirm-part"
+        id="confirm-part-trigger"
+      >
+        <span class="bs-stepper-circle">2</span>
+        <span class="bs-stepper-label">Confirmar datos</span>
+      </button>
+    </div>
+    <div class="line"></div>
     <div class="step" data-target="#payment-part">
       <button
         type="button"
@@ -22,7 +35,7 @@
         aria-controls="payment-part"
         id="payment-part-trigger"
       >
-        <span class="bs-stepper-circle">2</span>
+        <span class="bs-stepper-circle">3</span>
         <span class="bs-stepper-label">Pagar boletos</span>
       </button>
     </div>
@@ -50,14 +63,23 @@
         </div>
       </div>
     </div>
-    <!-- Pagar boletos -->
+    <!-- confirmar boletos -->
+    <div
+      id="confirm-part"
+      class="content"
+      role="tabpanel"
+      aria-labelledby="payment-part-trigger"
+    >
+      <app-cine-invoice></app-cine-invoice>
+    </div>
+    <!-- Pagar entradas -->
     <div
       id="payment-part"
       class="content"
       role="tabpanel"
       aria-labelledby="payment-part-trigger"
     >
-      <app-cine-invoice></app-cine-invoice>
+      <app-cine-payement-card></app-cine-payement-card>
     </div>
   </div>
 </div>

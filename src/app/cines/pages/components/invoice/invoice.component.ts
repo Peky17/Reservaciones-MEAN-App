@@ -18,6 +18,10 @@ export class InvoiceComponent {
     this.reservarCineComponent.previous();
   }
 
+  next() {
+    this.reservarCineComponent.next();
+  }
+
   print() {
     // Crea un clon del div que contiene el contenido a imprimir
     const printContents = document
