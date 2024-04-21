@@ -38,10 +38,17 @@
       <div class="row">
         <app-select-asientos></app-select-asientos>
       </div>
-      <button type="button" class="btn btn-primary" (click)="next()">
-        Vincular dispositivo
-        <i class="fa fa-check-circle-o" style="margin: 4px"></i>
-      </button>
+      <br />
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-auto">
+            <button type="button" class="btn btn-primary" (click)="next()">
+              Siguiente <i class="fa fa-arrow-right"></i>
+              <i class="fa fa-check-circle-o" style="margin: 6px"></i>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
     <!-- Pagar boletos -->
     <div
@@ -50,11 +57,7 @@
       role="tabpanel"
       aria-labelledby="payment-part-trigger"
     >
-      <h5>EJEMPLO 2</h5>
-      <button type="button" class="btn btn-primary" (click)="previous()">
-        Vincular dispositivo
-        <i class="fa fa-check-circle-o" style="margin: 4px"></i>
-      </button>
+      <app-cine-invoice></app-cine-invoice>
     </div>
   </div>
 </div>

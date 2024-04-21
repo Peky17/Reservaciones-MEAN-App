@@ -9,6 +9,7 @@ import { ViewCinesComponent } from './pages/view-cines/view-cines.component';
 import { CardSliderComponent } from './pages/components/card-slider/card-slider.component';
 import { SelectAsientosComponent } from './pages/components/select-asientos/select-asientos.component';
 import { SeatsioAngularModule } from '@seatsio/seatsio-angular';
+import { InvoiceComponent } from './pages/components/invoice/invoice.component';
 @NgModule({
   declarations: [
     CinesComponent,
@@ -16,6 +17,7 @@ import { SeatsioAngularModule } from '@seatsio/seatsio-angular';
     ViewCinesComponent,
     CardSliderComponent,
     SelectAsientosComponent,
+    InvoiceComponent,
   ],
   imports: [
     CommonModule,

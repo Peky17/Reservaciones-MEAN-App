@@ -1,6 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import Stepper from 'bs-stepper';
+import { InvoiceComponent } from '../components/invoice/invoice.component';
 
 @Component({
   selector: 'app-reservar-cine',
@@ -37,13 +38,13 @@ export class ReservarCineComponent {
     }
   }
 
-  next() {
+  public next() {
     if (this.stepper) {
       this.stepper.next();
     }
   }
 
-  previous() {
+  public previous() {
     if (this.stepper) {
       this.stepper.previous();
     }
