@@ -74,8 +74,8 @@ export class MuseoInvoiceComponent {
 
     this.dataSharingService.dataObservable.subscribe((data: any) => {
       this.qtySeats = data.cantidadEntradas;
-      // this.name = this.datosCompartidos.selection;
     });
+    this.getSharedData();
   }
 
   previous() {
@@ -83,6 +83,16 @@ export class MuseoInvoiceComponent {
   }
 
   next() {
+    const jsonData = {
+      concepto: this.cineName,
+      cantidad: this.qtySeats,
+      unitario: this.precio,
+      total: this.precio * this.qtySeats,
+    };
+    // Guardar la reserva en la base de datos
+    this.datosCompartidos =
+      this.dataSharingService.sendDataToSharedPayement(JSON.stringify(jsonData));
+    // Siguiente step
     this.reservarMuseoComponent.next();
   }
 
@@ -136,5 +146,11 @@ export class MuseoInvoiceComponent {
     return (
       fecha.getDate() + '/' + (fecha.getMonth() + 1) + '/' + fecha.getFullYear()
     );
+  }
+
+  getSharedData() {
+    this.dataSharingService.dataObservable.subscribe((data) => {
+      console.log(data.toString);
+    });
   }
 }
