@@ -3,10 +3,6 @@ import { environment } from '../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-interface TeatroResponse {
-  tareas: any[];
-}
-
 @Injectable({
   providedIn: 'root',
 })
@@ -20,12 +16,33 @@ export class TeatroService {
   }
   constructor(private httpClient: HttpClient) {}
 
-  getAllTeatros(): Observable<TeatroResponse> {
+  getAllTeatros(): Observable<any> {
     const headers = {
       'x-auth-token': this.user.token,
     };
-    return this.httpClient.get<TeatroResponse>(
-      `${this.baseUrl}/museos/getAllMuseos`,
+    return this.httpClient.get<any>(`${this.baseUrl}/teatros/getAllTeatros`, {
+      headers,
+    });
+  }
+
+  getTeatroById(id_teatro: string): Observable<any> {
+    const headers = {
+      'x-auth-token': this.user.token,
+    };
+    return this.httpClient.get<any>(
+      `${this.baseUrl}/teatros/searchTeatroById/${id_teatro}`,
+      {
+        headers,
+      }
+    );
+  }
+
+  getAllObrasInCines(id_teatro: string): Observable<any> {
+    const headers = {
+      'x-auth-token': this.user.token,
+    };
+    return this.httpClient.get<any>(
+      `${this.baseUrl}/teatros/getAllObrasByTeatro/${id_teatro}`,
       {
         headers,
       }
