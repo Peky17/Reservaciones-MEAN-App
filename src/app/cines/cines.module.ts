@@ -11,6 +11,7 @@ import { SelectAsientosComponent } from './pages/components/select-asientos/sele
 import { SeatsioAngularModule } from '@seatsio/seatsio-angular';
 import { InvoiceComponent } from './pages/components/invoice/invoice.component';
 import { PayementCardComponent } from './pages/components/payement-card/payement-card.component';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     CinesComponent,
@@ -26,6 +27,7 @@ import { PayementCardComponent } from './pages/components/payement-card/payement
     CinesRoutingModule,
     SharedModule,
     SeatsioAngularModule,
+    ReactiveFormsModule,
   ],
 })
 export class CinesModule {}
