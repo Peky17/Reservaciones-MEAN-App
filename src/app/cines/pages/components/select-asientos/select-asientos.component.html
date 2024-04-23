@@ -5,12 +5,26 @@
   </div>
   <div class="col-4">
     <!-- <select class="form-control" id="movie" (change)="updateSelectedCount()"> -->
-    <select
+    <!-- <select
+      #select
       class="form-control"
       id="movie"
       (change)="updateSelectedMovie($event)"
     >
       <option *ngFor="let movie of funciones" [value]="movie.precio">
+        {{ movie.nombre }} ({{ movie.precio | currency : "MXN" }})
+      </option>
+    </select> -->
+    <select
+      #select
+      class="form-control"
+      id="movie"
+      (change)="updateSelectedMovie($event)"
+    >
+      <option
+        *ngFor="let movie of funciones; let i = index"
+        [value]="movie.precio"
+      >
         {{ movie.nombre }} ({{ movie.precio | currency : "MXN" }})
       </option>
     </select>
