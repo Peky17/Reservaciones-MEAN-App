@@ -6,6 +6,9 @@ import { Observable, catchError, map, of, tap } from 'rxjs';
 interface CineResponse {
   cines: any[];
 }
+interface FuncionResponse {
+  funciones: any[];
+}
 
 @Injectable({
   providedIn: 'root',
@@ -26,6 +29,30 @@ export class CineService {
     };
     return this.httpClient.get<CineResponse>(
       `${this.baseUrl}/cines/getAllCines`,
+      {
+        headers,
+      }
+    );
+  }
+
+  getAllFuncionesInCines(id_cine: string): Observable<FuncionResponse> {
+    const headers = {
+      'x-auth-token': this.user.token,
+    };
+    return this.httpClient.get<FuncionResponse>(
+      `${this.baseUrl}/cines/getAllFuncionesByCine/${id_cine}`,
+      {
+        headers,
+      }
+    );
+  }
+
+  getCineById(id_cine: string): Observable<any> {
+    const headers = {
+      'x-auth-token': this.user.token,
+    };
+    return this.httpClient.get<any>(
+      `${this.baseUrl}/cines/searchCinesById/${id_cine}`,
       {
         headers,
       }

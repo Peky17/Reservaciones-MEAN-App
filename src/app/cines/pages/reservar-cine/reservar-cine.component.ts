@@ -1,7 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import Stepper from 'bs-stepper';
-import { InvoiceComponent } from '../components/invoice/invoice.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-reservar-cine',
@@ -40,7 +40,21 @@ export class ReservarCineComponent {
 
   public next() {
     if (this.stepper) {
-      this.stepper.next();
+      // Validar asientos seleccionados
+      if (this.validateSeatSelection()) {
+        this.stepper.next();
+      } else {
+        Swal.fire({
+          toast: true,
+          position: 'top-end',
+          title: 'Error',
+          text: 'Porfavor seleccione al menos un asiento.',
+          timer: 1800,
+          timerProgressBar: true,
+          icon: 'info',
+          showConfirmButton: false,
+        });
+      }
     }
   }
 
@@ -48,5 +62,14 @@ export class ReservarCineComponent {
     if (this.stepper) {
       this.stepper.previous();
     }
+  }
+
+  validateSeatSelection() {
+    const selectedSeats = JSON.parse(localStorage.getItem('selectedSeats')!);
+    console.log(selectedSeats);
+    if (selectedSeats.length <= 1) {
+      return false;
+    }
+    return true;
   }
 }

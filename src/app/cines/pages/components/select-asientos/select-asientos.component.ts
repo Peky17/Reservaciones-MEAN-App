@@ -1,4 +1,12 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { CineService } from 'src/app/services/cine.service';
+import Swal from 'sweetalert2';
+
+interface Seat {
+  sold: boolean;
+  selected: boolean;
+}
 
 @Component({
   selector: 'app-select-asientos',
@@ -6,64 +14,53 @@ import { Component } from '@angular/core';
   styleUrls: ['./select-asientos.component.css'],
 })
 export class SelectAsientosComponent {
-  container!: HTMLElement;
-  seats!: NodeListOf<Element>;
-  count!: HTMLElement;
-  total!: HTMLElement;
-  movieSelect!: HTMLSelectElement;
-  ticketPrice!: number;
+  cineId: string = '';
+  cineData: any;
+  funciones: any[] = [];
+  seatRows: Seat[][] = [];
+  selectedSeatPosition: { row: number; seat: number } | null = null;
+  selectedSeatsCount: number = 0;
+  ticketPrice: number = 0;
+
+  constructor(
+    private route: ActivatedRoute,
+    private cineService: CineService
+  ) {}
 
   ngOnInit() {
-    this.container = document.querySelector('.container')!;
-    this.seats = document.querySelectorAll('.row .seat:not(.sold)');
-    this.count = document.getElementById('count')!;
-    this.total = document.getElementById('total')!;
-    this.movieSelect = document.getElementById('movie') as HTMLSelectElement;
-
-    this.populateUI();
-
-    this.ticketPrice = +this.movieSelect.value;
-
-    // Movie select event
-    this.movieSelect.addEventListener('change', (e: Event) => {
-      this.ticketPrice = +this.movieSelect.value;
-      this.setMovieData(this.movieSelect.selectedIndex, this.movieSelect.value);
-      this.updateSelectedCount();
+    // Get cine data
+    this.cineId = this.route.snapshot.paramMap.get('id')!;
+    this.cineService.getCineById(this.cineId).subscribe({
+      next: (response) => {
+        if (
+          response.cine == null ||
+          response.cine == undefined ||
+          response.cine.length === 0
+        ) {
+          Swal.fire({
+            icon: 'info',
+            title: 'Oops...',
+            text: 'No se encontró el cine seleccionado.',
+          });
+        } else {
+          this.cineData = response.cine;
+        }
+      },
+      error: (error) => {
+        Swal.fire({
+          icon: 'info',
+          title: 'Oops...',
+          text: 'No se encontró el cine seleccionado.',
+        });
+        console.log(error);
+      },
     });
-
-    // Seat click event
-    this.container.addEventListener('click', (e: Event) => {
-      const target = e.target as HTMLElement;
-
-      if (
-        target.classList.contains('seat') &&
-        !target.classList.contains('sold')
-      ) {
-        target.classList.toggle('selected');
-        this.updateSelectedCount();
-      }
-    });
-
-    // Initial count and total set
-    this.updateSelectedCount();
+    // Get funciones by cine
+    this.getFuncionesByCine(this.cineId);
   }
 
-  populateUI() {
-    const selectedSeats = JSON.parse(localStorage.getItem('selectedSeats')!);
-
-    if (selectedSeats !== null && selectedSeats.length > 0) {
-      this.seats.forEach((seat: Element, index: number) => {
-        if (selectedSeats.indexOf(index) > -1) {
-          seat.classList.add('selected');
-        }
-      });
-    }
-
-    const selectedMovieIndex = localStorage.getItem('selectedMovieIndex');
-
-    if (selectedMovieIndex !== null) {
-      this.movieSelect.selectedIndex = parseInt(selectedMovieIndex, 10);
-    }
+  ngAfterViewInit() {
+    this.updateSelectedCount();
   }
 
   setMovieData(movieIndex: number, moviePrice: string) {
@@ -71,15 +68,96 @@ export class SelectAsientosComponent {
     localStorage.setItem('selectedMoviePrice', moviePrice);
   }
 
+  // updateSelectedCount() {
+  //   this.selectedSeatsCount = this.seatRows.reduce((count, row) => {
+  //     return count + row.filter((seat) => seat.selected).length;
+  //   }, 0);
+  // }
+
+  // toggleSeatSelection(seat: Seat) {
+  //   if (!seat.sold) {
+  //     seat.selected = !seat.selected;
+  //     this.updateSelectedCount();
+  //   }
+  // }
+
   updateSelectedCount() {
-    const selectedSeats = document.querySelectorAll('.row .seat.selected');
-    const seatsIndex = Array.from(selectedSeats).map((seat: Element) =>
-      Array.from(this.seats).indexOf(seat)
-    );
-    localStorage.setItem('selectedSeats', JSON.stringify(seatsIndex));
-    const selectedSeatsCount = selectedSeats.length - 1;
-    this.count.innerText = selectedSeatsCount.toString();
-    this.total.innerText = (selectedSeatsCount * this.ticketPrice).toString();
-    this.setMovieData(this.movieSelect.selectedIndex, this.movieSelect.value);
+    this.selectedSeatsCount = this.seatRows.reduce((count, row) => {
+      return count + row.filter((seat) => seat.selected).length;
+    }, 0);
+  }
+
+  saveSelectedSeatsToLocalStorage(row: number, seat: number) {
+    let selectedSeats =
+      JSON.parse(localStorage.getItem('selectedSeats')!) || [];
+    if (this.seatRows[row][seat].selected) {
+      selectedSeats.push({ row, seat });
+    } else {
+      selectedSeats = selectedSeats.filter(
+        (seatPosition: { row: number; seat: number }) =>
+          seatPosition.row !== row || seatPosition.seat !== seat
+      );
+    }
+    localStorage.setItem('selectedSeats', JSON.stringify(selectedSeats));
+  }
+
+  toggleSeatSelection(row: number, seat: number) {
+    if (!this.seatRows[row][seat].sold) {
+      this.seatRows[row][seat].selected = !this.seatRows[row][seat].selected;
+      this.updateSelectedCount();
+      this.saveSelectedSeatsToLocalStorage(row, seat);
+      if (this.seatRows[row][seat].selected) {
+        this.selectedSeatPosition = { row, seat };
+        console.log(this.selectedSeatPosition);
+      } else {
+        this.selectedSeatPosition = null;
+      }
+    }
+  }
+
+  // toggleSeatSelection(row: number, seat: number) {
+  //   if (!this.seatRows[row][seat].sold) {
+  //     this.seatRows[row][seat].selected = !this.seatRows[row][seat].selected;
+  //     this.updateSelectedCount();
+  //     if (this.seatRows[row][seat].selected) {
+  //       this.selectedSeatPosition = { row, seat };
+  //       console.log(this.selectedSeatPosition);
+  //     } else {
+  //       this.selectedSeatPosition = null;
+  //     }
+  //   }
+  // }
+
+  getFuncionesByCine(id_cine: string) {
+    this.cineService.getAllFuncionesInCines(id_cine).subscribe({
+      next: (response) => {
+        this.funciones = response.funciones;
+        this.seatRows = this.generateSeatRows();
+        this.ticketPrice = +this.funciones[0].precio;
+        this.setMovieData(0, this.funciones[0].precio);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
+
+  generateSeatRows(): Seat[][] {
+    // Generate seat rows based on your seat arrangement logic
+    // Example implementation:
+    const rows: Seat[][] = [];
+    const numRows = 8;
+    const numSeatsPerRow = 8;
+
+    for (let i = 0; i < numRows; i++) {
+      const row: Seat[] = [];
+      for (let j = 0; j < numSeatsPerRow; j++) {
+        const seat: Seat = { sold: false, selected: false };
+        row.push(seat);
+      }
+      rows.push(row);
+    }
+
+    return rows;
   }
 }
