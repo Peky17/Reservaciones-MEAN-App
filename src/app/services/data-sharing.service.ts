@@ -13,4 +13,8 @@ export class DataSharingService {
   sendDataToSharedService(data: string) {
     this.dataSubject.next(data);
   }
+
+  sendDataToSharedPayement(data: string) {
+    this.dataSubject.next(data);
+  }
 }

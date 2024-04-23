@@ -34,36 +34,37 @@
 
             <div class="tab-content">
               <div class="tab-pane fade show active" id="nav-tab-card">
-                <form [formGroup]="myForm" (ngSubmit)="submitForm()">
+                <form [formGroup]="myForm">
                   <div class="form-group">
                     <label for="username">Full name (on the card)</label>
                     <input
                       type="text"
                       class="form-control"
                       formControlName="username"
-                      placeholder=""
+                      placeholder="Ingrese su nombre completo"
                       required
                     />
                   </div>
                   <br />
 
                   <div class="form-group">
-                    <label for="cardNumber">Card number</label>
-                    <div class="input-group">
-                      <input
-                        type="text"
-                        class="form-control"
-                        formControlName="cardNumber"
-                        placeholder=""
-                      />
-                      <div class="input-group-append">
-                        <span class="input-group-text text-muted">
-                          <i class="fab fa-cc-visa"></i>
-                          <i class="fab fa-cc-amex"></i>
-                          <i class="fab fa-cc-mastercard"></i>
-                        </span>
-                      </div>
-                    </div>
+                    <label for="cardNumber">Número de tarjeta</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="cardNumber"
+                      placeholder="XXXX-XXXX-XXXX"
+                      (keydown)="formatCardNumber($event)"
+                    />
+                    <small
+                      class="text-danger"
+                      *ngIf="
+                        myForm.get('cardNumber')!.invalid &&
+                        myForm.get('cardNumber')!.touched
+                      "
+                    >
+                      Por favor, ingresa un número de tarjeta válido.
+                    </small>
                   </div>
                   <br />
 
@@ -97,6 +98,7 @@
                         ></label>
                         <input
                           type="number"
+                          placeholder="XYZ"
                           class="form-control"
                           formControlName="cvv"
                           required
@@ -115,7 +117,7 @@
                       <i class="fas fa-arrow-left" style="margin: 4px"></i>
                       Anterior
                     </button>
-                    <button class="btn btn-success" type="submit">
+                    <button class="btn btn-success" type="button" (click)="createReservacion()">
                       Realizar pago
                       <i class="fas fa-credit-card" style="margin: 4px"></i>
                     </button>

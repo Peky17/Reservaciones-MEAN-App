@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { ReservarCineComponent } from '../../reservar-cine/reservar-cine.component';
 import { DataSharingService } from 'src/app/services/data-sharing.service';
+import { ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2';
+import { CineService } from 'src/app/services/cine.service';
 
 @Component({
   selector: 'app-cine-invoice',
@@ -8,6 +11,8 @@ import { DataSharingService } from 'src/app/services/data-sharing.service';
   styleUrls: ['./invoice.component.css'],
 })
 export class InvoiceComponent {
+  cineId: string = '';
+  cineName: string = '';
   fechaActual: Date;
   id_usuario: string = '';
   username: string = '';
@@ -27,12 +32,42 @@ export class InvoiceComponent {
 
   constructor(
     private reservarCineComponent: ReservarCineComponent,
-    private dataSharingService: DataSharingService
+    private dataSharingService: DataSharingService,
+    private cineService: CineService,
+    private route: ActivatedRoute
   ) {
     this.fechaActual = new Date();
   }
 
   ngOnInit() {
+    // Obtener datos del cine
+    this.cineId = this.route.snapshot.paramMap.get('id')!;
+    this.cineService.getCineById(this.cineId).subscribe({
+      next: (response) => {
+        if (
+          response.cine == null ||
+          response.cine == undefined ||
+          response.cine.length === 0
+        ) {
+          Swal.fire({
+            icon: 'info',
+            title: 'Oops...',
+            text: 'No se encontró el cine seleccionado.',
+          });
+        } else {
+          this.cineName = response.cine.nombre;
+        }
+      },
+      error: (error) => {
+        Swal.fire({
+          icon: 'info',
+          title: 'Oops...',
+          text: 'No se encontró el cine seleccionado.',
+        });
+        console.log(error);
+      },
+    });
+
     const user = localStorage.getItem('user');
     this.id_usuario = JSON.parse(user!).id;
     this.username = JSON.parse(user!).username;
