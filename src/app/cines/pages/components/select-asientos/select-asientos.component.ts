@@ -28,6 +28,8 @@ export class SelectAsientosComponent {
   ) {}
 
   ngOnInit() {
+    // Clean selected seats
+    this.cleanSelectedSeats();
     // Get cine data
     this.cineId = this.route.snapshot.paramMap.get('id')!;
     this.cineService.getCineById(this.cineId).subscribe({
@@ -68,23 +70,16 @@ export class SelectAsientosComponent {
     localStorage.setItem('selectedMoviePrice', moviePrice);
   }
 
-  // updateSelectedCount() {
-  //   this.selectedSeatsCount = this.seatRows.reduce((count, row) => {
-  //     return count + row.filter((seat) => seat.selected).length;
-  //   }, 0);
-  // }
-
-  // toggleSeatSelection(seat: Seat) {
-  //   if (!seat.sold) {
-  //     seat.selected = !seat.selected;
-  //     this.updateSelectedCount();
-  //   }
-  // }
-
   updateSelectedCount() {
     this.selectedSeatsCount = this.seatRows.reduce((count, row) => {
       return count + row.filter((seat) => seat.selected).length;
     }, 0);
+  }
+
+  updateSelectedMovie(event: any) {
+    const price = event.target.value;
+    this.ticketPrice = +price; // Convierte el precio a tipo numérico
+    this.updateSelectedCount(); // Actualiza la cantidad de asientos seleccionados
   }
 
   saveSelectedSeatsToLocalStorage(row: number, seat: number) {
@@ -108,25 +103,11 @@ export class SelectAsientosComponent {
       this.saveSelectedSeatsToLocalStorage(row, seat);
       if (this.seatRows[row][seat].selected) {
         this.selectedSeatPosition = { row, seat };
-        console.log(this.selectedSeatPosition);
       } else {
         this.selectedSeatPosition = null;
       }
     }
   }
-
-  // toggleSeatSelection(row: number, seat: number) {
-  //   if (!this.seatRows[row][seat].sold) {
-  //     this.seatRows[row][seat].selected = !this.seatRows[row][seat].selected;
-  //     this.updateSelectedCount();
-  //     if (this.seatRows[row][seat].selected) {
-  //       this.selectedSeatPosition = { row, seat };
-  //       console.log(this.selectedSeatPosition);
-  //     } else {
-  //       this.selectedSeatPosition = null;
-  //     }
-  //   }
-  // }
 
   getFuncionesByCine(id_cine: string) {
     this.cineService.getAllFuncionesInCines(id_cine).subscribe({
@@ -137,7 +118,13 @@ export class SelectAsientosComponent {
         this.setMovieData(0, this.funciones[0].precio);
       },
       error: (error) => {
-        console.log(error);
+        Swal.fire({
+          icon: 'info',
+          title: 'Oops...',
+          text: 'No se encontraron funciones para el cine seleccionado.',
+        }).then(() => {
+          window.history.back();
+        });
       },
     });
   }
@@ -159,5 +146,9 @@ export class SelectAsientosComponent {
     }
 
     return rows;
+  }
+
+  cleanSelectedSeats() {
+    localStorage.removeItem('selectedSeats');
   }
 }

@@ -4,9 +4,14 @@
     <label><b>Seleccione una función:</b></label>
   </div>
   <div class="col-4">
-    <select class="form-control" id="movie" (change)="updateSelectedCount()">
+    <!-- <select class="form-control" id="movie" (change)="updateSelectedCount()"> -->
+    <select
+      class="form-control"
+      id="movie"
+      (change)="updateSelectedMovie($event)"
+    >
       <option *ngFor="let movie of funciones" [value]="movie.precio">
-        {{ movie.nombre }} (RS.{{ movie.precio }})
+        {{ movie.nombre }} ({{ movie.precio | currency : "MXN" }})
       </option>
     </select>
   </div>
@@ -28,24 +33,10 @@
   </li>
 </ul>
 
-<!-- Asientos container -->
-<!-- <div class="container">
-  <div class="screen"></div>
-  <div class="d-flex align-items-center justify-content-center">
-    <div class="row" *ngFor="let row of seatRows">
-      <div
-        class="seat"
-        *ngFor="let seat of row"
-        [ngClass]="{ sold: seat.sold, selected: seat.selected }"
-        (click)="toggleSeatSelection(seat)"
-      ></div>
-    </div>
-  </div>
-</div> -->
-
 <div class="container">
   <!-- pantalla -->
   <div class="screen"></div>
+  <!-- Renderizar asientos -->
   <div class="d-flex align-items-center justify-content-center">
     <div class="row" *ngFor="let row of seatRows; let i = index">
       <div
