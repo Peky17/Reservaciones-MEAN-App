@@ -33,20 +33,20 @@ export class ReservarMuseoComponent {
   public next() {
     if (this.stepper) {
       // Validar asientos seleccionados
-      if (this.validateSeatSelection()) {
+      // if (this.validateSeatSelection()) {
         this.stepper.next();
-      } else {
-        Swal.fire({
-          toast: true,
-          position: 'top-end',
-          title: 'Error',
-          text: 'Porfavor seleccione al menos un asiento.',
-          timer: 1800,
-          timerProgressBar: true,
-          icon: 'info',
-          showConfirmButton: false,
-        });
-      }
+      // } else {
+      //   Swal.fire({
+      //     toast: true,
+      //     position: 'top-end',
+      //     title: 'Error',
+      //     text: 'Porfavor seleccione al menos un asiento.',
+      //     timer: 1800,
+      //     timerProgressBar: true,
+      //     icon: 'info',
+      //     showConfirmButton: false,
+      //   });
+      // }
     }
   }
 
