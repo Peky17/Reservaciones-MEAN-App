@@ -13,12 +13,12 @@ import Swal from 'sweetalert2';
 })
 export class ReservarCineComponent {
   // Mensaje para cerrar pestaña
-  // @HostListener('window:beforeunload', ['$event'])
-  // handleBeforeUnload(event: any): void {
-  //   const mensaje =
-  //     '¿Estás seguro de abandonar la página? Los cambios no se guardarán.';
-  //   event.returnValue = mensaje;
-  // }
+  @HostListener('window:beforeunload', ['$event'])
+  handleBeforeUnload(event: any): void {
+    const mensaje =
+      '¿Estás seguro de abandonar la página? Los cambios no se guardarán.';
+    event.returnValue = mensaje;
+  }
 
   constructor(private route: ActivatedRoute) {}
 
