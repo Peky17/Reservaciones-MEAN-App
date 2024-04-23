@@ -78,8 +78,12 @@ export class SelectAsientosComponent {
 
   updateSelectedMovie(event: any) {
     const price = event.target.value;
-    this.ticketPrice = +price; // Convierte el precio a tipo numérico
-    this.updateSelectedCount(); // Actualiza la cantidad de asientos seleccionados
+    // Convierte el precio a tipo numérico
+    this.ticketPrice=+price;
+    // Actualiza la cantidad de asientos seleccionados
+    this.updateSelectedCount();
+    // Actualiza el precio de la película seleccionada
+    this.setMovieData(event.target.selectedIndex, price);
   }
 
   saveSelectedSeatsToLocalStorage(row: number, seat: number) {

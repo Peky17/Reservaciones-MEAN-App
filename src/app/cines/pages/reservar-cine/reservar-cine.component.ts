@@ -66,10 +66,10 @@ export class ReservarCineComponent {
 
   validateSeatSelection() {
     const selectedSeats = JSON.parse(localStorage.getItem('selectedSeats')!);
-    console.log(selectedSeats);
-    if (selectedSeats.length <= 1) {
+    if (selectedSeats == undefined || selectedSeats.length === 0) {
       return false;
+    } else {
+      return true;
     }
-    return true;
   }
 }
