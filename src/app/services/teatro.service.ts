@@ -37,7 +37,7 @@ export class TeatroService {
     );
   }
 
-  getAllObrasInCines(id_teatro: string): Observable<any> {
+  getAllObrasInTeatro(id_teatro: string): Observable<any> {
     const headers = {
       'x-auth-token': this.user.token,
     };
