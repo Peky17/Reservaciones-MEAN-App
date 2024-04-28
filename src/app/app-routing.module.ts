@@ -35,6 +35,15 @@ const routes: Routes = [
     canLoad: [AuthGuard],
   },
   {
+    path: 'reservaciones',
+    loadChildren: () =>
+      import('./reservaciones/reservaciones.module').then(
+        (m) => m.ReservacionesModule
+      ),
+    canActivate: [AuthGuard],
+    canLoad: [AuthGuard],
+  },
+  {
     path: '**',
     redirectTo: 'auth',
   },
