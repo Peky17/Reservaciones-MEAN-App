@@ -150,7 +150,7 @@ export class MuseoInvoiceComponent {
 
   getSharedData() {
     this.dataSharingService.dataObservable.subscribe((data) => {
-      console.log(data.toString);
+      // console.log(data.toString);
     });
   }
 }
