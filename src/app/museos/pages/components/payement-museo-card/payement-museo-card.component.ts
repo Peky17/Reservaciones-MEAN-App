@@ -51,14 +51,9 @@ export class PayementMuseoCardComponent {
 
   createReservacion() {
     if (this.myForm.valid) {
-      console.log(this.myForm.value);
-      const reservacion = {
-        concepto: this.name,
-        cantidad: this.qtyEntradas,
-        unitario: this.precio,
-        total: this.total,
-      };
-      this.sendReservaion(reservacion);
+      // console.log(this.myForm.value);
+      const data = this.datosCompartidos;
+      this.sendReservaion(data);
     } else {
       Swal.fire({
         icon: 'error',
@@ -69,7 +64,8 @@ export class PayementMuseoCardComponent {
   }
 
   sendReservaion(reservacion: any) {
-    this.reservacionService.createReservacion(reservacion).subscribe({
+    const reservacionJson = JSON.parse(reservacion);
+    this.reservacionService.createReservacion(reservacionJson).subscribe({
       next: (response) => {
         console.log(response);
         Swal.fire({
@@ -77,7 +73,7 @@ export class PayementMuseoCardComponent {
           title: '¡Reservación exitosa!',
           text: 'Tu reservación ha sido guardada correctamente',
         }).then(() => {
-          this.router.navigate(['/cines/home']);
+          this.router.navigate(['/museos/home']);
         });
       },
       error: (error) => {
