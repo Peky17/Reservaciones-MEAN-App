@@ -26,6 +26,7 @@ export class AuthService {
             this._user = {
               id: res.id,
               username: res.username,
+              email: data.email,
               token: res.token,
             };
           } else {
