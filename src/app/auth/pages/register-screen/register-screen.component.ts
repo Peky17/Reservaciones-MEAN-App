@@ -23,7 +23,7 @@ export class RegisterScreenComponent implements OnInit {
         Validators.required,
         Validators.minLength(4),
         Validators.maxLength(10),
-        Validators.pattern(/^[A-Z][A-Za-z0-9]{3,9}$/),
+        Validators.pattern(/^[a-zA-Z0-9]+$/),
       ],
     ],
     password: [
@@ -147,7 +147,7 @@ export class RegisterScreenComponent implements OnInit {
 
   validateUsername(): void {
     const usernameControl = this.miFormulario.get('username');
-    const pattern = /^[A-Z][A-Za-z0-9]{3,9}$/;
+    const pattern = /^[a-zA-Z0-9]+$/;
     const usernameValue = usernameControl!.value;
     const isUsernameValid = pattern.test(usernameValue);
     if (!isUsernameValid) {
