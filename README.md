@@ -1,6 +1,9 @@
-# MEAN
+# App de reservaciones ticketmaster
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.6.
+
+## Guía de instalación rápida:
+https://chat.openai.com/share/e0aa0955-c098-4cf3-95cf-4b2cfef09c2f
 
 ## Development server
 
